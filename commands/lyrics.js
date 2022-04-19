@@ -18,8 +18,6 @@ module.exports = {
      */
     async execute(interaction) {
 
-        const embed = new MessageEmbed();
-
         const song = interaction.options.getString('titre').replace(/ /g, '%20');
         
         // const trackId = await interaction.track(song);

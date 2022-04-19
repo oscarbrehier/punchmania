@@ -21,7 +21,11 @@ module.exports = {
         const url = 'https://prod.radio-api.net/stations/now-playing?stationIds=skyrock';
         let request = await axios.get(url).then(res => res.data[0].title);
 
-        if(request !== 'SKYROCK - Planète Rap') {
+        if(!request) {
+
+            
+
+        } else if(!request.startsWith('SKYROCK')) {
 
             request = request.slice(0, -9);
             const shazamURL = `https://www.shazam.com/services/search/v4/fr/GR/web/search?term=${request}&numResults=3&offset=0&types=artists,songs&limit=3`;

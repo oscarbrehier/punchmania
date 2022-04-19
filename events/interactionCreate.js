@@ -14,13 +14,13 @@ module.exports = {
             const command = interaction.client.commands.get(interaction.commandName);
             const permissions = command.permissions;
             const embed = new MessageEmbed()
-                .setColor('#f39c12')
+                .setColor(interaction.randomColor())
 
             if(permissions && permissions.length > 0) {
 
                 if(!interaction.member.permissions.has(permissions)) {
 
-                    embed.setTitle('Permission nécessaire manquante');
+                    embed.setAuthor({ name: 'Permission nécessaire manquante', iconURL: interaction.user.displayAvatarURL() });
                     return interaction.reply({
                         embeds: [embed],
                         ephemeral: true

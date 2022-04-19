@@ -1,8 +1,10 @@
 const fs = require('fs');
 const { Client, Collection } = require('discord.js');
 const Database = require('./config/Database');
+const Leaderboards = require('./config/Leaderboards');
 require('dotenv').config();
 require('./helpers/extenders');
+require('./helpers/Client');
 
 console.clear();
 new Database().connect();
