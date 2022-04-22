@@ -16,24 +16,10 @@ module.exports = {
         if(interaction.isCommand()) {
 
             const command = interaction.client.commands.get(interaction.commandName);
-            const permissions = command.permissions;
+            const client = interaction.client;
 
             const embed = new MessageEmbed()
                 .setColor("RANDOM")
-
-            if(permissions && permissions.length > 0) {
-
-                if(!interaction.member.permissions.has(permissions)) {
-
-                    embed.setAuthor({ name: 'Permission nécessaire manquante', iconURL: interaction.user.displayAvatarURL() });
-                    return interaction.reply({
-                        embeds: [embed],
-                        ephemeral: true
-                    });
-
-                }
-
-            }
 
             if(!command) return;
 
@@ -57,7 +43,7 @@ module.exports = {
                     
                     }
 
-                    await command.execute(interaction);
+                    await command.execute(interaction, client);
                     Timeout.set(`${command.data.name}${interaction.member.id}`, Date.now() + command.cooldown);
 
                     setTimeout(() => {
@@ -66,7 +52,7 @@ module.exports = {
 
                 } else {
 
-                    await command.execute(interaction);
+                    await command.execute(interaction, client);
                 
                 }
             

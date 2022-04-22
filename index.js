@@ -1,7 +1,8 @@
 const DatabaseClient = require('./Client/DatabaseClient');
 const { Client, Collection } = require('discord.js');
-const fs = require('fs');
+const { Player } = require('discord-player');
 require('dotenv').config();
+const fs = require('fs');
 require('./helper/extenders');
 
 const client = new Client({ intents: 32767 });
@@ -14,8 +15,10 @@ new DatabaseClient().connect();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const commands = [];
 
+client.songs = new Collection();
 client.commands = new Collection();
 client.cooldown = new Collection();
+client.player = new Player(client);
 
 for (const file of commandFiles) {
 
